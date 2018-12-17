@@ -1,0 +1,41 @@
+1. Downsample:
+	
+      To reduce the the length of the original waveform sample (65535Hz, ~1.66 seconds),
+      I use scipy.signal.decimate to downsample the waveform.
+
+
+2. Distance:
+   
+      Amplitude of the simulated waveform is given in unit of strain * distance. So I divide the amplitude by 10 Kpc.
+
+
+3. SNR: 
+
+      After whitening the data, the SNR is computed as the optimal SNR, but that does not match the SNR provided by the waveform file.
+
+
+4. Scale amplitude of waveform according to pre-set SNR:
+
+      the provided SNR of the simulated SNRs are not the same for the waveform samples. So I scale the amplitudes of the waveform according to the pre-set SNR.
+      But this causes problems, as this will also scale the noise by the same data. To partially solve the problem, I only scale the data between 100Hz to 500Hz by the pre-set SNR.
+      But this needs a more reliable method. 
+
+5. Different networks may have similar values of loss / accuracy. But some will require more epochs and smaller learning rates to achieve this.
+   Are there any guidance by which I can judge whether I am using a better network than others, or is my aim to find the simplest network that can give me small loss and high accuracy.
+
+
+6. Noise:
+
+      The way I generate the noise is by using the amplitude spectral density of a detector.
+      The real part and img part of the noise are generated using a Gaussian distribution with mean equal to 0, and standard deviation equal to 1. 
+      The real and img part of the noise will then be summed and converted to be time domain, and added to the waveform sample.
+      But I have seen other ways of doing this, e.g. multiplying the sum of the real and img part by the number of time samples before converting back to the time domain.
+      
+
+7. Data shift. 
+
+     The way I shift the data is first to pad the data with zeros to make it maybe 2 times of three times longer than it original it. 
+     And then draw a number determining where the signal will be placed (at the center + or - 20%). 
+     But this will make the spacing in the frequency domain smaller than it originally  is.
+   
+

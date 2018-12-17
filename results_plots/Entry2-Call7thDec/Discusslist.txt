@@ -1,0 +1,36 @@
+1. Original waveforms are sampled with a sampling rate equal to 65535 Hz.   
+   Coupled with the longest simulation being ~1.66 seconds long, this results in the longest vector having 1e5 elements. 
+   So I use downsample function scipy.signal.decimate to downsample the waveform by a factor of 8 (8191hZ).
+
+
+2. Distance. The waveform samples are given in the unit of strain * distance (in centimeters), but no distance information is given.
+   But I guess this should not matter as multiplying by the distance means the waveform is as seen at the core. 
+   So to produce the data set for training/validating/testing, I divided the waveforms (in unit of strain * distance) by 1 Kpc  
+  (this is intentional so that after whitenning, the data does not need any factor to be seen by Keras) 
+   then the waveforms are considered to be "seen" from 1kpc.
+
+3. The SNRs computed do not entirely match that provided by waveform file.
+
+
+4. Not all the amplitudes of the waveform samples are in the same order of magnitude, so I set SNR = a certain value. 
+   However, as I do not have information about the frequency range of the waveform sample, multiplying by a factor to make the SNR the same means
+   the amplitudes at all frequencies will be multiplied by the SNR factor, which may not be entirely correct.
+   And Strangly, even if I set SNR = 8, they are not recognizable to keras. I guess this means the way I compute the SNR is not correct.
+   Also, if scaled by SNR, the noise will also be scaled by the same factor, which does not seem to be correct. 
+   Currently, I have hardcoded only 100Hz to 500Hz will be scaled to partially solve the problem.
+
+
+5. Different networks with different can give me roughly the same loss and accuracy. But some will have to have large enough epochs, and small enough learning rates.
+   Are there any guidance by which I can judge whether I am using a better network than others, or is my aim to find the simplest network that can give me small loss and high accuracy.
+
+
+6. The way noise is generated.
+   Currently, the imaginary part and the real part of the noise in the frequency domain is:
+   real = np.rando	m.normal(0, 1.0, Nf) * ASD 
+   img = np.random.normal(0, 1.0, Nf) * ASD
+   
+   But, I have seen different ways. Ns * real, Ns * img.
+
+7. The way I shift the data is first to pad the data with zeros to make it maybe 2 times of three times longer than it original it. 
+   And then draw a number determining where the signal will be placed. But this will make the spacing in the frequency domain smaller than it originally  is.
+   Is that a problem?
