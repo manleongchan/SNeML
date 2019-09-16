@@ -1,0 +1,52 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: main.aux
+The style file: unsrt3.bst
+Database file #1: main.bib
+Repeated entry---line 1063 of file main.bib
+ : @article{rover2009bayesian
+ :                           ,
+I'm skipping whatever remains of this entry
+Warning--empty journal in LIGOW
+You've used 79 entries,
+            1814 wiz_defined-function locations,
+            876 strings with 19781 characters,
+and the built_in function-call counts, 20064 in all, are:
+= -- 1756
+> -- 1140
+< -- 10
++ -- 533
+- -- 267
+* -- 1410
+:= -- 3108
+add.period$ -- 241
+call.type$ -- 79
+change.case$ -- 78
+chr.to.int$ -- 0
+cite$ -- 80
+duplicate$ -- 812
+empty$ -- 1795
+format.name$ -- 267
+if$ -- 4495
+int.to.chr$ -- 0
+int.to.str$ -- 79
+missing$ -- 80
+newline$ -- 398
+num.names$ -- 81
+pop$ -- 250
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 603
+stack$ -- 0
+substring$ -- 1198
+swap$ -- 168
+text.length$ -- 10
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 177
+width$ -- 81
+write$ -- 866
+(There was 1 error message)
